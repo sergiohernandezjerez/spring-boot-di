@@ -2,6 +2,9 @@ package com.thefundidors.springboot.di.app.models.domain;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +33,17 @@ public class Factura {
 		this.descripcion = descripcion;
 		this.cliente = cliente;
 		this.items = items;
+	}
+	
+	@PostConstruct
+	public void inicializar() {
+		cliente.setNombre(cliente.getNombre().concat(" ").concat("Pepe"));
+		descripcion = descripcion.concat(" del cliente: ").concat(cliente.getNombre());
+	}
+	
+	@PreDestroy
+	public void destruir() {
+		System.out.println("Factura destruida: ".concat(descripcion));
 	}
 
 	public String getDescripcion() {
