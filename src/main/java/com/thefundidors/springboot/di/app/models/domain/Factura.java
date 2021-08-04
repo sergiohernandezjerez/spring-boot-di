@@ -1,5 +1,6 @@
 package com.thefundidors.springboot.di.app.models.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,10 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Component
-public class Factura {
+@RequestScope
+public class Factura implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7741090784163136845L;
 
 	@Value("${factura.descripcion}")
 	private String descripcion;
